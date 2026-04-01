@@ -501,14 +501,14 @@ def fetch_all(keywords: List[str], max_per_source: int = 15) -> List[Dict]:
     results = []
     try:
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-        futures = [
-            executor.submit(fetch_rss,           keywords, max_per_source),
-            executor.submit(fetch_guardian,      keywords, max_per_source),
-            executor.submit(fetch_nyt,           keywords, max_per_source),
-            executor.submit(fetch_stocktwits,    keywords, max_per_source),
-            executor.submit(fetch_google_trends, keywords, max_per_source),
-            executor.submit(_fetch_reddit_json,  keywords, max_per_source),
-        ]
+            futures = [
+                executor.submit(fetch_rss,           keywords, max_per_source),
+                executor.submit(fetch_guardian,      keywords, max_per_source),
+                executor.submit(fetch_nyt,           keywords, max_per_source),
+                executor.submit(fetch_stocktwits,    keywords, max_per_source),
+                executor.submit(fetch_google_trends, keywords, max_per_source),
+                executor.submit(_fetch_reddit_json,  keywords, max_per_source),
+            ]
             for future in concurrent.futures.as_completed(futures):
                 try:
                     results.extend(future.result())
@@ -521,7 +521,6 @@ def fetch_all(keywords: List[str], max_per_source: int = 15) -> List[Dict]:
         _set_cached(keywords, results)
         return results
     finally:
-        # Signal any waiting threads and remove from in-flight tracker
         with _inflight_lock:
             _inflight.pop(key, None)
         event.set()
