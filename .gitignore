@@ -1,0 +1,13 @@
+# Secrets — never commit these
+.env
+
+# Database and logs — server generates its own
+data/trades.db
+logs/sandbox.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/

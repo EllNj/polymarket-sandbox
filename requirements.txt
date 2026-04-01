@@ -1,0 +1,15 @@
+# Core dependencies — all free, pip-installable
+streamlit>=1.32.0            # Live web dashboard (run: streamlit run dashboard.py)
+pytrends>=4.9.2              # Google Trends wrapper (no API key needed)
+vaderSentiment>=3.3.2       # VADER sentiment analysis (no API key needed)
+feedparser>=6.0.10           # RSS feed parsing
+requests>=2.31.0             # HTTP requests for NewsAPI / Reddit JSON
+praw>=7.7.1                  # Reddit API wrapper (credentials optional)
+matplotlib>=3.8.0            # Analytics charts
+pandas>=2.0.0                # Data wrangling for feedback loop
+schedule>=1.2.1              # Lightweight job scheduler for feedback loop
+python-dotenv>=1.0.0         # Loads API keys from .env file
+
+# Optional — heavier NLP (comment out if you want lighter footprint)
+# transformers>=4.38.0       # Hugging Face DistilBERT (replaces VADER)
+# torch>=2.2.0               # Required by transformers
