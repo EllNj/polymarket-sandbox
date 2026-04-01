@@ -8,6 +8,7 @@ The dashboard reads from the SQLite database in real time —
 no need to stop the bot. Auto-refreshes every 5 seconds.
 """
 
+import os
 import sqlite3
 import time
 from datetime import datetime, timezone
@@ -30,6 +31,13 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+# Password protection
+_password = os.getenv("DASHBOARD_PASSWORD", "")
+if _password:
+    pwd = st.text_input("Password", type="password")
+    if pwd != _password:
+        st.stop()
 
 # ---------------------------------------------------------------------------
 # DATA LOADING
