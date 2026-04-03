@@ -163,12 +163,9 @@ row2_left, row2_right = st.columns(2)
 
 with row2_left:
     st.subheader("Bankroll per Strategy")
-    bankroll = (
-        df_all.sort_values("timestamp")
-        .groupby("strategy")
-        .apply(lambda g: g.set_index("timestamp")["bankroll_after"], include_groups=False)
-        .T
-    )
+    bankroll = df_all.sort_values("timestamp").pivot_table(
+        index="timestamp", columns="strategy", values="bankroll_after", aggfunc="last"
+    ).ffill()
     st.line_chart(bankroll, height=240)
 
 with row2_right:
